@@ -47,7 +47,6 @@
           </div>
         </li>
       </ul>
-      <button @click="backToMenu" class="back-btn">Back to Menu</button>
     </div>
     <div class="slot-content">
       <slot>Ini adalah tampilan Todos</slot>

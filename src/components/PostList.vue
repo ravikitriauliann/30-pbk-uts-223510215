@@ -14,7 +14,6 @@
           <p class="post-body">{{ post.body }}</p>
         </li>
       </ul>
-      <button @click="backToMenu" class="back-btn">Back to Menu</button>
     </div>
     <div class="slot-content">
       <slot>Ini adalah tampilan Post</slot>
@@ -90,8 +89,6 @@ export default {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  width: 100%;
 }
 
 .main-title {

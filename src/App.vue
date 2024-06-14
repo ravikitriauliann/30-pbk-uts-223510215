@@ -1,41 +1,48 @@
 <template>
   <div class="app">
     <header>
-      <nav v-if="!selectedMenu" class="menu-nav">
+      <nav class="menu-nav">
         <ul class="menu-ul">
           <li @click="selectedMenu = 'todos'" class="menu-li">📝 TODOS</li>
           <li @click="selectedMenu = 'post'" class="menu-li">🚀 POST</li>
+          <li @click="selectedMenu = 'album'" class="menu-li">📷 ALBUM</li>
         </ul>
       </nav>
     </header>
-    <Todos v-if="selectedMenu === 'todos'" @backToMenu="selectedMenu = null" />
-    <Posts
-      v-else-if="selectedMenu === 'post'"
-      @backToMenu="selectedMenu = null"
-    />
+    <component :is="selectedMenuComponent" v-if="selectedMenu" />
   </div>
 </template>
 
 <script>
-import Todos from "./components/Todos1.vue";
-import Posts from "./components/Post1.vue";
+import Todos from "./components/TodoList.vue";
+import Posts from "./components/PostList.vue";
+import Album from "./components/AlbumDetails.vue";
 
 export default {
   components: {
     Todos,
     Posts,
+    Album,
   },
   data() {
     return {
       selectedMenu: null,
     };
   },
+  computed: {
+    selectedMenuComponent() {
+      if (this.selectedMenu === "todos") return "Todos";
+      if (this.selectedMenu === "post") return "Posts";
+      if (this.selectedMenu === "album") return "Album";
+      return null;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .app {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -66,16 +73,8 @@ export default {
 }
 
 .Todos,
-.Posts {
+.Posts,
+.Album {
   margin-top: 20px;
-}
-
-/* Animation */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
 }
 </style>
